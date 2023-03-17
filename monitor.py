@@ -30,9 +30,9 @@ class Monitor:
         
         # Check exit code of process and generate result
         if proc.returncode != 0:
-            return self.generate_result_error(proc.stdout.decode('utf-8'))
+            return self.generate_result_error(proc.stderr.decode('utf-8'))
         else:
-            return self.generate_result_success(proc.stderr.decode('utf-8'))
+            return self.generate_result_success(proc.stdout.decode('utf-8'))
 
     # Format result data from polling into a nicer output
     def format(self, data):
