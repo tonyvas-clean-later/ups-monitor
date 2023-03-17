@@ -12,4 +12,11 @@ UPS_LIST = [
 
 monitors = {}
 for ups_name in UPS_LIST:
-    monitors[ups_name] = Monitor(DUMP_DIR, POLL_INTERVAL_S, ups_name)
+    monitors[ups_name] = Monitor(DUMP_DIR, ups_name)
+
+for ups_name in monitors:
+    result = monitors[ups_name].run()
+    if result['success']:
+        print(ups_name, result['data'])
+    else:
+        print(ups_name, result['error'])
