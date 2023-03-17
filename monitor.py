@@ -3,7 +3,7 @@
 from subprocess import run, PIPE
 from json import loads, dumps
 from os import path
-import time
+from datetime import datetime
 
 class Monitor:
     # Initialise instance
@@ -51,7 +51,21 @@ class Monitor:
 
     # Write UPS status to dump file
     def write(self, data):
-        return self.generate_result_error('Write not yet implemented!')
+        try:
+            # Get date formatted as YYYY-MM-DD
+            date = datetime.today().strftime('%Y-%m-%d')
+            # Get time formatted as HH:MM:SS
+            time = datetime.today().strftime('%H:%M:%S')
+            # Path to write to
+            dump_file = path.join(self.dump_dir, f'{self.ups_name}_{date}')
+            
+            # Open and append time and data to dump file
+            with open(dump_file, 'a') as f:
+                f.write(f'{time} - {data}\n')
+
+            return self.generate_result_success('Successfully written!')
+        except Exception as e:
+            return self.generate_result_error(e)
 
     # Run iteration of monitor
     def run(self):
