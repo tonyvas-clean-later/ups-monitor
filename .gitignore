@@ -1,3 +1,9 @@
+# Ignore everything inside the dump directory
+dump/*
+
+# Ignore trash
+.Trash-*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
