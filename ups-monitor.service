@@ -1,0 +1,9 @@
+[Unit]
+Description=Monitor UPS status
+
+[Service]
+# Insert path to main.py here
+#ExecStart=/usr/bin/python3 /path/to/main.py
+
+[Install]
+WantedBy=multi-user.target
