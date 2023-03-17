@@ -36,7 +36,18 @@ class Monitor:
 
     # Format result data from polling into a nicer output
     def format(self, data):
-        return self.generate_result_error('Format not yet implemented!')
+        try:
+            json_obj = {}
+            # Loop over each line
+            for line in data.strip().split('\n'):
+                # Split line into key/value pair and add to obj
+                [key, value] = line.strip().split(': ')
+                json_obj[key] = value
+
+            # Return json string data result
+            return self.generate_result_success(dumps(json_obj))
+        except Exception as e:
+            return self.generate_result_error(e)
 
     # Write UPS status to dump file
     def write(self, data):
